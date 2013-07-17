@@ -16,16 +16,28 @@
 #include <cvd/byte.h>
 #include <cvd/rgb.h>
 
+#include <iostream>
+#include <string>
+#include <vector>
+
 struct VideoSourceData;
 
 class VideoSource
 {
  public:
-  VideoSource();
+  VideoSource(bool FILE=false, double s=0);
   void GetAndFillFrameBWandRGB(CVD::Image<CVD::byte> &imBW, CVD::Image<CVD::Rgb<CVD::byte> > &imRGB);
+  /* Teesid Leelasawassuk: 27th April 2011 */
+  void GetAndFillFrameBWandRGB(CVD::Image<CVD::byte> &imBW, CVD::Image<CVD::Rgb<CVD::byte> > &imRGB, int &i);
   CVD::ImageRef Size();
-  
+  /* Teesid Leelasawassuk: 23rd April 2011 */
+  void SetNameList(std::string path, bool backward=false);	// Will be called in System.cc at the initialized state
+  std::vector<std::string> sNameList;
+  int sFrameNumber;
  private:
+  double n;
+  double speed;
+  bool file;
   void *mptr;
   CVD::ImageRef mirSize;
 };

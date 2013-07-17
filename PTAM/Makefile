@@ -16,7 +16,7 @@ COMPILEFLAGS += $(shell pkg-config --cflags glib-2.0) $(shell pkg-config --cflag
 LINKFLAGS += $(shell pkg-config --libs glib-2.0) $(shell pkg-config --libs gstreamer-0.10) -lgstapp-0.10
 
 # Edit this line to change video source
-VIDEOSOURCE = VideoSource_Linux_Seq_File.cc.o
+VIDEOSOURCE = VideoSource_Linux_Seq_File.o
 #VIDEOSOURCE = VideoSource_Linux_OpenCV.o
 #VIDEOSOURCE = VideoSource_Linux_Gstreamer_File.o
 

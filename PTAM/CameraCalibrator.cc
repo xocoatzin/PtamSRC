@@ -43,7 +43,7 @@ int main()
 
 
 CameraCalibrator::CameraCalibrator()
-  :mGLWindow(mVideoSource.Size(), "Camera Calibrator"), mCamera("Camera")
+  : mVideoSource(true, 1), mGLWindow(mVideoSource.Size(), "Camera Calibrator"), mCamera("Camera")
 {
   mbDone = false;
   GUI.RegisterCommand("CameraCalibrator.GrabNextFrame", GUICommandCallBack, this);
@@ -71,6 +71,8 @@ CameraCalibrator::CameraCalibrator()
 
 void CameraCalibrator::Run()
 {
+  int frame = 0;
+  mVideoSource.SetNameList("../calib/", false);
   while(!mbDone)
     {
       // We use two versions of each video frame:
@@ -81,7 +83,7 @@ void CameraCalibrator::Run()
       Image<byte>  imFrameBW(mVideoSource.Size());
       
       // Grab new video frame...
-      mVideoSource.GetAndFillFrameBWandRGB(imFrameBW, imFrameRGB);  
+      mVideoSource.GetAndFillFrameBWandRGB(imFrameBW, imFrameRGB, frame);  
       
       // Set up openGL
       mGLWindow.SetupViewport();

@@ -15,7 +15,7 @@ using namespace GVars3;
 
 
 System::System()
-  : mGLWindow(mVideoSource.Size(), "PTAM")
+  : mVideoSource(true, 1), mGLWindow(mVideoSource.Size(), "PTAM")
 {
   GUI.RegisterCommand("exit", GUICommandCallBack, this);
   GUI.RegisterCommand("quit", GUICommandCallBack, this);
@@ -58,6 +58,8 @@ System::System()
 
 void System::Run()
 {
+  int frame = 0;
+  mVideoSource.SetNameList("../video-in/", false);
   while(!mbDone)
     {
       
@@ -66,7 +68,7 @@ void System::Run()
       // and one RGB, for drawing.
 
       // Grab new video frame...
-      mVideoSource.GetAndFillFrameBWandRGB(mimFrameBW, mimFrameRGB);  
+      mVideoSource.GetAndFillFrameBWandRGB(mimFrameBW, mimFrameRGB, frame);  
       static bool bFirstFrame = true;
       if(bFirstFrame)
 	{

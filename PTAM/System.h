@@ -16,6 +16,7 @@
 #include <cvd/image.h>
 #include <cvd/rgb.h>
 #include <cvd/byte.h>
+#include <string>
 
 class ATANCamera;
 class Map;
@@ -29,6 +30,7 @@ class System
 public:
   System();
   void Run();
+  void Run(char* dir);
   
 private:
   VideoSource mVideoSource;

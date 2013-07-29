@@ -13,7 +13,6 @@ using namespace CVD;
 using namespace std;
 using namespace GVars3;
 
-
 System::System()
   : mVideoSource(true, 1), mGLWindow(mVideoSource.Size(), "PTAM")
 {
@@ -58,8 +57,13 @@ System::System()
 
 void System::Run()
 {
+  System::Run("../video-in/");
+}
+
+void System::Run(char* dir)
+{
   int frame = 0;
-  mVideoSource.SetNameList("../video-in/", false);
+  mVideoSource.SetNameList(dir, false);
   while(!mbDone)
     {
       

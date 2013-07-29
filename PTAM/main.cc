@@ -9,8 +9,17 @@
 using namespace std;
 using namespace GVars3;
 
-int main()
+char* dir = "../video-in/";
+
+int main(int argc, char** argv)
 {
+  if(argc > 1)
+  {
+    dir = argv[1];
+  }
+
+  cout << " Using dir: " << dir << endl << endl;
+
   cout << "  Welcome to PTAM " << endl;
   cout << "  --------------- " << endl;
   cout << "  Parallel tracking and mapping for Small AR workspaces" << endl;
@@ -25,7 +34,7 @@ int main()
   try
     {
       System s;
-      s.Run();
+      s.Run(dir);
     }
   catch(CVD::Exceptions::All e)
     {

@@ -10,8 +10,17 @@ using namespace CVD;
 using namespace std;
 using namespace GVars3;
 
-int main()
+string dir = "../calib/";
+
+int main(int argc, char** argv)
 {
+  if(argc > 1)
+  {
+    dir = string(argv[1]);
+  }
+
+  cout << " Using dir: " << dir << endl << endl;
+
   cout << "  Welcome to CameraCalibrator " << endl;
   cout << "  -------------------------------------- " << endl;
   cout << "  Parallel tracking and mapping for Small AR workspaces" << endl;
@@ -72,7 +81,7 @@ CameraCalibrator::CameraCalibrator()
 void CameraCalibrator::Run()
 {
   int frame = 0;
-  mVideoSource.SetNameList("../calib/", false);
+  mVideoSource.SetNameList(dir, false);
   while(!mbDone)
     {
       // We use two versions of each video frame:

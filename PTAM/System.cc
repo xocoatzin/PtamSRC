@@ -14,6 +14,8 @@
 #include <unistd.h>
 #undef _POSIX_SOURCE
 #include <stdio.h>
+#include <cvd/image_io.h>
+#include <stdlib.h>
 
 using namespace CVD;
 using namespace std;
@@ -133,10 +135,17 @@ void System::Run() {
 
 		if(mpMap->IsGood())
 		{
+			char buffer [33];
+
+			sprintf(buffer,"%d",i);
+			string filename = "out/"+date+"/"+date+"_"+string(buffer)+".png";
+			img_save(mimFrameRGB, filename);
+
 			Vector<3>& translation = cPose.get_translation();
 			SO3<>& rotation = cPose.get_rotation();
 			Matrix <3,3> rotMtx = rotation.get_matrix();
-			cout << i++ << " T:"
+			poses
+				<< filename << endl
 				<< translation
 				<< endl
 				<< rotMtx
